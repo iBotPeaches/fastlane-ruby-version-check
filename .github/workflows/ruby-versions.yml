@@ -48,3 +48,27 @@ jobs:
 
       - name: Run basic fastlane command
         run: fastlane env
+
+  modern-bundler:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby 4.0
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
+          bundler-cache: false
+
+      - name: Install fastlane
+        run: gem install fastlane
+
+      - name: Update to modern Bundler
+        run: bundler update --bundler && bundler --version
+
+      - name: Install fastlane with modern Bundler
+        run: |
+          bundler install
+          bundler exec fastlane --version
+  
