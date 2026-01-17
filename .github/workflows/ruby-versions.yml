@@ -35,16 +35,16 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: false
+          bundler-cache: true
 
       - name: Display Ruby version
         run: ruby --version
 
       - name: Install fastlane
-        run: gem install fastlane
+        run: bundle install
 
       - name: Verify fastlane installation
-        run: fastlane --version
+        run: bundle exec fastlane --version
 
       - name: Run basic fastlane command
-        run: fastlane env
+        run: bundle exec fastlane env
